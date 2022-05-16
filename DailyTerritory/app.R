@@ -7,20 +7,23 @@
 #    http://shiny.rstudio.com/
 #
 
+setwd("C:/Users/jfdei/OneDrive/Desktop")
+
 library(shiny)
 library(sf)
 library(tidyverse)
 library(ggspatial)
 library(terra)
 
+url = "https://github.com/Deitsch-John/BTBWmapping/raw/main/spatial.zip.zip"
+download.file(url, "spatial.zip.zip")
+unzip("spatial.zip.zip")
 
-setwd("C:/Users/jfdei/OneDrive/Desktop/BTBWmapping")
-
-#load HB shape-files 
-hbef.roads = read_sf(layer = "hbef_roads", dsn = "./spatialdata")
-hbef.streams = read_sf(layer = "hbef_hydro", dsn = "./spatialdata")
-hbef.elevation10 = read_sf(layer = "hbef_cont10", dsn = "./spatialdata")
-HBEFrast = rast("./spatialdata/hbef_dem.tif")
+#load HB shape-files
+hbef.roads = read_sf(layer = "hbef_roads", dsn = ".")
+hbef.streams = read_sf(layer = "hbef_hydro", dsn = ".")
+hbef.elevation10 = read_sf(layer = "hbef_cont10", dsn = ".")
+HBEFrast = rast("hbef_dem.tif")
 
 obs_to_coords <- function(df, coord_col, crs_add){
   coords.sfg <- df$coords
@@ -32,7 +35,7 @@ obs_to_coords <- function(df, coord_col, crs_add){
   
 }
 
-BTBW = read.csv("BTBW.csv", header = TRUE)
+BTBW = read_csv("https://raw.githubusercontent.com/Deitsch-John/BTBWmapping/841db73a2fc84d6b5209e03885ad8604c388c10a/BTBW.csv")
 BTBW2 = BTBW %>%
   rowwise()%>%
   mutate(coords = list(st_point(c(long,lat))))  #create list column
@@ -177,5 +180,3 @@ server <- function(input, output, session) {
 # Run the application 
 shinyApp(ui = ui, server = server)
 
-runGitHub(repo = "BTBWmapping", username = "Deitsch-John", 
-         subdir = "DailyTerritory")
