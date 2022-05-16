@@ -7,8 +7,6 @@
 #    http://shiny.rstudio.com/
 #
 
-setwd("C:/Users/jfdei/OneDrive/Desktop")
-
 library(shiny)
 library(sf)
 library(tidyverse)
