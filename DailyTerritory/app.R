@@ -13,18 +13,13 @@ library(tidyverse)
 library(ggspatial)
 library(terra)
 
-setwd("C:/Users/jfdei/OneDrive/Desktop/R Knowledge/Geocomputation/Geocomputation RBook/HB.Shapes")
+setwd("C:/Users/jfdei/OneDrive/Desktop/BTBWmapping")
 
 #load HB shape-files 
-hbef.boundary = read_sf(layer = "hbef_boundary", dsn = ".")
-hbef.roads = read_sf(layer = "hbef_roads", dsn = ".")
-hbef.streams = read_sf(layer = "hbef_hydro", dsn = ".")
-hbef.elevation10 = read_sf(layer = "hbef_cont10", dsn = ".")
-
-setwd("C:/Users/jfdei/OneDrive/Desktop/qGIS/raster.library")
-HBEFrast = rast("hbef_dem.tif")
-
-setwd("C:/Users/jfdei/OneDrive/Desktop/R Knowledge/Geocomputation/Geocomputation RBook")
+hbef.roads = read_sf(layer = "hbef_roads", dsn = "./spatialdata")
+hbef.streams = read_sf(layer = "hbef_hydro", dsn = "./spatialdata")
+hbef.elevation10 = read_sf(layer = "hbef_cont10", dsn = "./spatialdata")
+HBEFrast = rast("./spatialdata/hbef_dem.tif")
 
 obs_to_coords <- function(df, coord_col, crs_add){
   coords.sfg <- df$coords
@@ -180,3 +175,6 @@ server <- function(input, output, session) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
+runGitHub(repo = "BTBWmapping", username = "Deitsch-John", 
+         subdir = "DailyTerritory")
