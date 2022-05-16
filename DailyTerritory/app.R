@@ -13,8 +13,11 @@ library(tidyverse)
 library(ggspatial)
 library(terra)
 
+<<<<<<< HEAD
 setwd("C:/Users/jfdei/OneDrive/Desktop/BTBWmapping")
 
+=======
+>>>>>>> 1c7df19ab17f5e652279c32e4dcac9162099531c
 #load HB shape-files 
 hbef.roads = read_sf(layer = "hbef_roads", dsn = "./spatialdata")
 hbef.streams = read_sf(layer = "hbef_hydro", dsn = "./spatialdata")
